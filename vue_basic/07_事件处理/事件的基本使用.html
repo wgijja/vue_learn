@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>事件处理</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="root">
+        <h1>你好，{{name}}</h1>
+        <!-- <button v-on:click="showInfo">点我提示信息</button> -->
+        <!-- 简写 -->
+        <button @click="showInfo1">点我提示信息1(不传参)</button>
+        <button @click="showInfo2(66,$event)">点我提示信息2（传参）</button>
+    </div>
+
+
+    <script>
+        Vue.config.productionTip = false;
+
+        new Vue({
+            el: '#root',
+            data() {
+                return {
+                    name: 'aaa'
+                }
+            },
+            methods: {
+                showInfo1(event){
+                    // console.log(event.target.innerText)
+                    // console.log(this) //此处的this是vm对象
+                    alert("你好！")
+                },
+                showInfo2(num,a){
+                    // console.log(event.target.innerText)
+                    // console.log(this) //此处的this是vm对象
+                    alert("你好！!!")
+                }
+            }
+        })
+
+
+    </script>
+</body>
+
+</html>

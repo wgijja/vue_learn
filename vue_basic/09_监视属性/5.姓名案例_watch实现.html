@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>姓名案例_watch实现</title>
+    <script type="text/javaScript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        姓：<input type="text" v-model="firstName"><br><br>
+        名：<input type="text" v-model="lastName"><br><br>
+        全名：<span>{{fullName}}</span>
+    </div>
+
+
+    <script>
+        Vue.config.productionTip = false;
+
+        const vm = new Vue({
+            data() {
+                return {
+                    firstName: '张',
+                    lastName: '三',
+                    fullName: '张-三'
+                }
+            },
+            computed: {
+            },
+            watch: {
+                firstName(newValue) {
+                    this.fullName = newValue + '-' + this.lastName
+                },
+                lastName(val) {
+                    this.fullName = this.firstName + '-' + val
+                }
+            }
+        })
+
+        vm.$mount('#root')
+    </script>
+</body>
+
+</html>

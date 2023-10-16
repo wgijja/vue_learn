@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>姓名案例_计算属性实现</title>
+    <script type="text/javaScript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        姓：<input type="text" v-model="firstName"><br><br>
+        名：<input type="text" v-model="lastName"><br><br>
+        全名：<span>{{fullName}}</span>
+    </div>
+
+
+    <script>
+        Vue.config.productionTip = false;
+
+        const vm = new Vue({
+            data() {
+                return {
+                    firstName: '张',
+                    lastName: '三'
+                }
+            },
+            computed: {
+                //完整写法
+                /* fullName: {
+                    get() {
+                        console.log("get被调用了")
+                        return this.firstName + '-' + this.lastName
+                    },
+                    set(value){
+                        console.log("get被调用了")
+                        const arr = value.split("-")
+                        this.firstName = arr[0];
+                        this.lastName = arr[1]
+                    }
+                } */
+
+                //简写，当只有getter时，才可简写，以下代码相当于get
+                fullName() {
+                    console.log("get被调用了")
+                    return this.firstName + '-' + this.lastName
+                }
+            }
+        })
+
+        vm.$mount('#root')
+    </script>
+</body>
+
+</html>

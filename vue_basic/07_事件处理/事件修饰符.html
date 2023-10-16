@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>事件修饰符</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        *{
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="root">
+        <H1>你好，{{name}}</H1>
+        <!-- 阻止默认事件 -->
+        <a href="http://www.baidu.com" @click.prevent = "showInfo">点我去百度</a>
+
+        <!-- 阻止事件冒泡 -->
+        <div @click="showInfo">
+            <button @click.stop="showInfo">点我提示信息</button>
+        </div>
+
+        <!-- 事件只触发一次 -->
+        <button @click.once="showInfo">事件只触发一次</button>
+    </div>
+
+
+    <script>
+        Vue.config.productionTip = false;
+
+        const vm = new Vue({
+            data() {
+                return {
+                   name:'aa' 
+                }
+            },
+            methods: {
+                showInfo(){
+                    alert("!!!")
+                }
+            }
+        })
+
+        vm.$mount('#root')
+    </script>
+</body>
+</html>

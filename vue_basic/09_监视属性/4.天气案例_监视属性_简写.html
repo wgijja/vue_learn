@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>天气案例_监视属性_简写</title>
+    <script type="text/javaScript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>今天天气很{{info}}</h2>
+        <button @click="change">点我吧</button>
+        
+    </div>
+
+
+    <script>
+        Vue.config.productionTip = false;
+
+        const vm = new Vue({
+            el: '#root',
+            data() {
+                return {
+                    isHot: true
+                }
+            },
+            computed: {
+                info() {
+                    return this.isHot ? '严热' : '凉爽'
+                }
+            },
+            methods: {
+                change() {
+                    this.isHot = !this.isHot
+                }
+            },
+            watch: {
+                //正常写法
+                /* isHot: {
+                    //immediate: true,//此配置用于初始化时调用一次handler
+                    //deep: true, //深度监视
+                    
+                    handler(newValue, oldValue) {
+                        console.log('isHot被修改了！', newValue, oldValue)
+                    }
+                }  */
+
+                //简写 当只有handler，无其他配置项时
+                /* isHot(newValue,oldValue){
+                    console.log('isHot被修改啦！',newValue,oldValue)
+                } */
+            
+            }
+        })
+
+        //正常写法
+        /* vm.$watch('isHot',{
+            imediate:true,
+            deep:true,
+            handler(newValue,oldValue){
+
+            }
+        }) */
+
+        //简写
+        vm.$watch('isHot',function(newValue,oldValue){
+            console.log('isHot被修改啦！',newValue,oldValue)
+        })
+    </script>
+</body>
+
+</html>
