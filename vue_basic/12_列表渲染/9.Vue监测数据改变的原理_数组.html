@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue监测数据改变的原理——数组</title>
+    <script type="text/javaScript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2>名称：{{name}}</h2>
+        <h2>地址：{{address}}</h2>
+
+
+    </div>
+
+    <script>
+        Vue.config.productionTip = false;
+
+        // 用computed实现
+        const vm = new Vue({
+            data() {
+                return {
+                    name: 'aaa',
+                    address: 'ssssssssss'
+                }
+            }
+
+        })
+        vm.$mount('#root')
+    </script>
+</body>
+
+</html>
