@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+    <script type="text/javaScript" src="../js/vue.js"></script>
+    <script type="text/javaScript" src="../js/dayjs.min.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <H2>显示格式化后的时间</H2>
+        <!-- 计算属性实现 -->
+        <h3>计算属性实现的时间是：{{fmtTime}}</h3>
+        <!-- methods实现 -->
+        <h3>methods实现的时间时：{{getDays()}}</h3>
+        <!-- 过滤器实现 -->
+        <h3>过滤器实现的时间时：{{timeStamp | tmeFormater}}</h3>
+        <!-- 过滤器实现 传参 -->
+        <h3>过滤器传参实现的时间时：{{timeStamp | tmeFormater('YYYY-MM-DD')}}</h3>
+        <!-- 过滤器串联 -->
+        <h3>过滤器传参实现的时间时：{{timeStamp | tmeFormater('YYYY-MM-DD') | mySlice}}</h3>
+    </div>
+
+    <div id="root2">
+        hello：{{msg | mySlice2}}
+    </div>
+
+    <script>
+        Vue.config.productionTip = false;
+        //全局过滤器
+        Vue.filter('mySlice2',function(value){
+            return value.slice(0,4)
+        })
+
+
+        const vm = new Vue({
+            data() {
+                return {
+                    timeStamp: 1697861653490
+                }
+            },
+            computed: {
+                fmtTime() {
+                    return dayjs(this.timeStamp).format('YYYY-MM-DD HH:mm:ss')
+                }
+            },
+            methods: {
+                getDays() {
+                    return dayjs(this.timeStamp).format('YYYY-MM-DD HH:mm:ss')
+                }
+            },
+            //局部过滤器
+            filters: {
+                tmeFormater(val, str = 'YYYY-MM-DD HH:mm:ss') {
+                    return dayjs(val).format(str)
+                },
+                mySlice(val){
+                    return val.slice(0,4)
+                }
+            }
+        })
+
+        vm.$mount('#root')
+
+        new Vue({
+            el:'#root2',
+            data(){
+                return {
+                    msg:'yyy1234'
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

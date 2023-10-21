@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>5.v-pre指令</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+<body>
+    <div id="root">
+      <h2 v-pre>Vue其实很简单</h2>
+      <h2 v-once>初始化的n值是：{{n}}</h2>
+      <h2>当前的n值是：{{n}}</h2>
+      <button @click="n++">点我N+1</button>
+    </div>
+    
+    <script>
+        Vue.config.productionTip = false;
+
+        const vm = new Vue({
+          data() {
+            return {
+                name:'尚硅谷',
+                n:1
+            }
+          },  
+        })
+        vm.$mount('#root')
+    </script>
+</body>
+</html>
