@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>生命周期</title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="root">
+        <h2 v-if="a">你好哇</h2>
+        <h2 :style="{opacity}">欢迎学习Vue</h2>
+        <hr />
+    </div>
+
+
+    <script>
+        Vue.config.productionTip = false;
+
+        const vm = new Vue({
+            data() {
+                return {
+                    a:false,
+                    opacity:1
+                }
+            },
+            mounted() {
+                console.log('mounted',this)
+                setInterval(()=>{
+                    this.opacity -= 0.01
+                    if(this.opacity <=0 ) this.opacity = 1
+                },16)
+            },
+        
+        })
+        vm.$mount('#root')
+    </script>
+</body>
+
+</html>
