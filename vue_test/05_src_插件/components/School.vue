@@ -1,29 +1,26 @@
 <template>
-    <div class="student">
-        <h2 @click="showName">学校名称：{{ name }}</h2>
+    <div class="school">
+        <h2>学校名称：{{ name | mySlice2}}</h2>
         <h2>学校地址：{{ address }}</h2>
     </div>
 </template>
 
 <script>
 
-// 引入混入
-// import {mixin,mixin2} from '../mixin'
 
 export default {
-    name: "Student",
+    name: "School",
     data() {
         return {
-            name:'幼儿园',
+            name:'幼儿园来啦地地地',
             address:'北京朝阳'
         };
     },
-    // mixins:[mixin,mixin2]
 };
 </script>
 
 <style>
-.student {
+.school {
     background-color: orange;
 }
 </style>
