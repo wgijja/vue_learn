@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>sessionStorage</title>
+</head>
+<body>
+    <h2>sessionStorage</h2>
+
+    <button onclick="saveData()">
+        点我保存数据
+    </button>
+
+    <button onclick="readData()">
+        点我读取数据
+    </button>
+
+    <button onclick="deleteData()">
+        点我删除数据
+    </button>
+
+    <button onclick="removeData()">
+        点我清空数据
+    </button>
+
+    <script type="text/javaScript">
+
+        let p = {name:'tom',age:19}
+
+        function saveData() {
+            sessionStorage.setItem('mykey','myVal')
+            sessionStorage.setItem('mykey2',666)
+            sessionStorage.setItem('person',JSON.stringify(p))
+        }
+        function readData() {
+            console.log(sessionStorage.getItem('mykey'))
+            console.log(sessionStorage.getItem('mykey2'))
+            console.log(JSON.parse(sessionStorage.getItem('person')))
+        }
+
+        function deleteData() {
+            sessionStorage.removeItem('mykey')
+        }
+
+        function removeData() {
+            sessionStorage.clear()
+        }
+
+    </script>
+</body>
+</html>
