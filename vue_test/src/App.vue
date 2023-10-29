@@ -1,103 +1,48 @@
 <template>
-    <div id="root">
-        <div class="todo-container">
-            <div class="todo-wrap">
-                <MyHeader :receive="receive"></MyHeader>
-                <MyList :todos="todos" :changeChecked="changeChecked" :deleteItem="deleteItem"></MyList>
-                <MyFooter :todos="todos" :checkedAll="checkedAll" :clearAll="clearAll"></MyFooter>
-            </div>
-        </div>
+    <div class="app">
+        <h1>{{ msg }}</h1>
+        <!-- 通过父组件给子组件传递函数类型的props实现：子给父传递数据 -->
+        <School :getSchoolName="getSchoolName"></School>
+
+        <!-- 通过父组件给子组件绑定自定义事件实现：子给父传递数据（第一种写法，使用@或v-on） -->
+        <!-- <Student v-on:atguigu.once="getStudentlName"></Student> -->
+
+        <!-- 通过父组件给子组件绑定自定义事件实现：子给父传递数据（第二种写法，使用ref，更灵活） -->
+        <Student ref="student" />
     </div>
 </template>
 
 <script>
-import MyHeader from "./components/MyHeader.vue";
-import MyFooter from "./components/MyFooter.vue";
-import MyList from "./components/MyList.vue";
+import Student from "./components/Student.vue";
+import School from "./components/School.vue";
 
 export default {
     name: "App",
-    components: { MyHeader, MyFooter, MyList },
+    components: { Student, School },
     data() {
         return {
-            todos: [
-                { id: "001", title: "抽烟", done: true },
-                { id: "002", title: "喝酒", done: false },
-                { id: "003", title: "开车", done: true },
-            ],
+            msg: "你好啊",
         };
     },
     methods: {
-        //新增
-        receive(val) {
-            this.todos.unshift(val);
+        getSchoolName(val) {
+            console.log("接收到了消息", val);
         },
-        //勾选
-        changeChecked(id) {
-            this.todos.forEach((i) => {
-                if (id === i.id) i.done = !i.done;
-            });
+        getStudentlName(val, ...params) {
+            console.log("getStudentlName被调用了！", val, params);
         },
-        //删除
-        deleteItem(id) {
-            this.todos = this.todos.filter((i) => i.id !== id);
-        },
-        //勾选全部或取消
-        checkedAll(val){
-            this.todos.forEach(i=>i.done=val)
-        },
-        //删除全部
-        clearAll(){
-            console.log('收到了')
-            this.todos = this.todos.filter(i=>!i.done)
-        }
+    },
+    mounted() {
+        // 绑定自定义事件
+        this.$refs.student.$on("atguigu", this.getStudentlName);
+        // 绑定自定义事件（一次性）
+        // this.$refs.student.$once("atguigu", this.getStudentlName);
     },
 };
 </script>
 
-
 <style>
-/*base*/
-body {
-    background: #fff;
-}
-
-.btn {
-    display: inline-block;
-    padding: 4px 12px;
-    margin-bottom: 0;
-    font-size: 14px;
-    line-height: 20px;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),
-        0 1px 2px rgba(0, 0, 0, 0.05);
-    border-radius: 4px;
-}
-
-.btn-danger {
-    color: #fff;
-    background-color: #da4f49;
-    border: 1px solid #bd362f;
-}
-
-.btn-danger:hover {
-    color: #fff;
-    background-color: #bd362f;
-}
-
-.btn:focus {
-    outline: none;
-}
-
-.todo-container {
-    width: 600px;
-    margin: 0 auto;
-}
-.todo-container .todo-wrap {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+.app {
+    background-color: gray;
 }
 </style>
