@@ -2,9 +2,9 @@
     <div id="root">
         <div class="todo-container">
             <div class="todo-wrap">
-                <MyHeader></MyHeader>
-                <MyList></MyList>
-                <MyFooter></MyFooter>
+                <MyHeader :receive="receive"></MyHeader>
+                <MyList :todos="todos" :changeChecked="changeChecked" :deleteItem="deleteItem"></MyList>
+                <MyFooter :todos="todos" :checkedAll="checkedAll" :clearAll="clearAll"></MyFooter>
             </div>
         </div>
     </div>
@@ -18,6 +18,40 @@ import MyList from "./components/MyList.vue";
 export default {
     name: "App",
     components: { MyHeader, MyFooter, MyList },
+    data() {
+        return {
+            todos: [
+                { id: "001", title: "抽烟", done: true },
+                { id: "002", title: "喝酒", done: false },
+                { id: "003", title: "开车", done: true },
+            ],
+        };
+    },
+    methods: {
+        //新增
+        receive(val) {
+            this.todos.unshift(val);
+        },
+        //勾选
+        changeChecked(id) {
+            this.todos.forEach((i) => {
+                if (id === i.id) i.done = !i.done;
+            });
+        },
+        //删除
+        deleteItem(id) {
+            this.todos = this.todos.filter((i) => i.id !== id);
+        },
+        //勾选全部或取消
+        checkedAll(val){
+            this.todos.forEach(i=>i.done=val)
+        },
+        //删除全部
+        clearAll(){
+            console.log('收到了')
+            this.todos = this.todos.filter(i=>!i.done)
+        }
+    },
 };
 </script>
 
@@ -66,5 +100,4 @@ body {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-
 </style>

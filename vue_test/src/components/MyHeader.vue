@@ -2,6 +2,7 @@
     <div class="todo-header">
         <input
             @keyup.enter="addItem"
+            v-model="title"
             type="text"
             placeholder="请输入你的任务名称，按回车键确认"
         />
@@ -13,17 +14,25 @@ import { nanoid } from "nanoid";
 
 export default {
     name: "MyHeader",
+    data() {
+        return {
+            title: ''
+        };
+    },
     methods: {
-        addItem(e) {
+        addItem() {
+            if (!this.title.trim()) return alert('输入不能为空！')
             //将用户的输入包装成一个输入对象
             const todoObj = {
                 id: nanoid(),
-                title: e.target.value,
+                title: this.title,
                 done: false,
             };
-            console.log(todoObj)
+            this.receive(todoObj);
+            this.title = ''
         },
     },
+    props: ["receive"],
 };
 </script>
 
