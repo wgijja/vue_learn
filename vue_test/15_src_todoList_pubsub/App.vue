@@ -17,10 +17,10 @@
 </template>
 
 <script>
+import pubsub from 'pubsub-js'
 import MyHeader from "./components/MyHeader.vue";
 import MyFooter from "./components/MyFooter.vue";
 import MyList from "./components/MyList.vue";
-import pubsub from 'pubsub-js'
 
 export default {
     name: "App",

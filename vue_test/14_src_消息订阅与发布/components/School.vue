@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import pubscb from "pubsub-js";
 export default {
     name: "School",
     data() {
@@ -15,12 +16,16 @@ export default {
         };
     },
     mounted() {
-        this.$bus.$on("hello", (val) => {
-            console.log("我是学校组件，我接收到了数据：", val);
+        // this.$bus.$on('hello', (val) => {
+        //     console.log("我是学校组件，我接收到了数据：", val);
+        // });
+        this.pubId = pubscb.subscribe("hello", (topic, data) => {
+            console.log("有人发布了hello消息，我收到了", data);
         });
     },
     beforeDestroy() {
-        this.$bus.$off("hello");
+        // this.$bus.$off('hello')
+        pubscb.unsubscribe(this.pubId)
     },
 };
 </script>
