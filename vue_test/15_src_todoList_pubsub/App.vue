@@ -41,8 +41,8 @@ export default {
                 if (id === i.id) i.done = !i.done;
             });
         },
-        //删除
-        deleteItem(topic,id) {
+        //删除,第一个参数是topic，但是不用，所以使用 _ 占位
+        deleteItem(_,id) {
             this.todos = this.todos.filter((i) => i.id !== id);
         },
         //勾选全部或取消
