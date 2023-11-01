@@ -8,16 +8,30 @@
             />
             <!-- 以下写法虽然也能实现功能，但是它改变了props传递过来的参数的值，违反原则，不建议使用 -->
             <!-- <input type="checkbox" v-model="todo.done" /> -->
-            <span>{{ todo.title }}</span>
+            <span v-show="!todo.isEdit">{{ todo.title }}</span>
+            <input
+                type="text"
+                v-show="todo.isEdit"
+                :value="todo.title"
+                @blur="handleBlur(todo, $event)"
+                ref="inputEl"
+            />
         </label>
         <button class="btn btn-danger" @click="deleteThis(todo.id)">
             删除
+        </button>
+        <button
+            class="btn btn-edit"
+            :value="todo.title"
+            @click="handleEdit(todo)"
+        >
+            编辑
         </button>
     </li>
 </template>
 
 <script>
-import pubsub from 'pubsub-js'
+import pubsub from "pubsub-js";
 export default {
     name: "MyItem",
     props: ["todo"],
@@ -29,6 +43,22 @@ export default {
             if (confirm("确定要删除吗？")) {
                 pubsub.publish("deleteItem", id);
             }
+        },
+        handleEdit(todo) {
+            if (todo.hasOwnProperty("isEdit")) {
+                todo.isEdit = true;
+            } else {
+                console.log("往对象上设置属性");
+                this.$set(todo, "isEdit", true);
+            }
+            this.$nextTick(function(){
+                this.$refs.inputEl.focus()
+            })
+        },
+        handleBlur(todo, e) {
+            todo.isEdit = false;
+            if(!e.target.value.trim()) return alert('输入内容不能为空')  
+            this.$bus.$emit("editItem", todo.id, e.target.value);
         },
     },
 };
