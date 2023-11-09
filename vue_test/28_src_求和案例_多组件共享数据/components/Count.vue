@@ -3,7 +3,7 @@
         <h1>当前的和为：{{ sum }}</h1>
         <h3>放大10倍为：{{ bigSum }}</h3>
         <h3>我在：{{ school }},学习：{{ subject }}</h3>
-        <h3 style="color: red">下面的列表人数为：{{ personList.length }}</h3>
+        <h3 style="color: red;">下面的列表人数为：{{ personList.length }}</h3>
         <select v-model.number="num">
             <option value="1">1</option>
             <option value="2">2</option>
@@ -30,21 +30,18 @@ export default {
     },
     methods: {
         //使用mapMutations生成的方法，方法中会去调用 commit 方法联系mutations。对象写法
-        ...mapMutations("countAbout", {
-            increment: "INCREMENT",
-            decrement: "DECREMENT",
-        }),
+        ...mapMutations({increment:'INCREMENT',decrement:'DECREMENT'}),
 
+        
         //使用mapMutations生成的方法，方法中会去调用 dispatch 方法联系actions。数组写法
-        ...mapActions("countAbout", ["incrementOdd", "incrementWait"]),
+        ...mapActions(['incrementOdd','incrementWait'])
     },
     computed: {
         //借助 mapState 生成计算属性，从state中读取数据（数组式）
-        ...mapState("countAbout", ["sum", "school", "subject", "personList"]),
-        ...mapState("personAbout", ["personList"]),
+        ...mapState(["sum", "school", "subject","personList"]),
 
         //借助 mapGetters 生成计算属性，从getters中读取数据（数组式）
-        ...mapGetters("countAbout", ["bigSum"]),
+        ...mapGetters(["bigSum"]),
     },
 };
 </script>
