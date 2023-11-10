@@ -6,13 +6,11 @@ import About from '../pages/About'
 import Home from '../pages/Home'
 import News from '../pages/News'
 import Message from '../pages/Message'
-import Detail from '../pages/Detail'
 
 //创建并暴露一个路由器
 export default new VueRouter({
     routes: [
         {
-            name: 'about',
             path: '/about',
             component: About
         },
@@ -26,14 +24,7 @@ export default new VueRouter({
                 },
                 {
                     path: 'message',
-                    component: Message,
-                    children: [
-                        {
-                            name: 'detail',
-                            path: 'detail',
-                            component: Detail
-                        }
-                    ]
+                    component: Message
                 }
             ]
         }
