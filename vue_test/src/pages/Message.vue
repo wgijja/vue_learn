@@ -2,6 +2,7 @@
     <div>
         <ul>
             <li v-for="d in detailList" :key="d.id">
+<<<<<<< HEAD
                 <!-- 路由params传参，字符串写法 -->
                 <!-- <router-link
                     :to="`/home/message/detail/${d.id}/${d.title}`"
@@ -9,6 +10,15 @@
                 > -->
 
                 <!-- 路由params传参，对象写法 -->
+=======
+                <!-- 路由query传参，字符串写法 -->
+                <!-- <router-link
+                    :to="`/home/message/detail?id=${d.id}&title=${d.title}`"
+                    >{{ d.title }}</router-link
+                > -->
+
+                <!-- 路由query传参，对象写法 -->
+>>>>>>> 3a9a80a4d84a0ebe3efa7603d4af799b3360fb1e
                 <router-link
                     :to="{
                         name: 'detail',

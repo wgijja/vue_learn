@@ -31,6 +31,7 @@ export default new VueRouter({
                         {
                             name: 'detail',
                             path: 'detail',
+<<<<<<< HEAD
                             component: Detail,
                             //props的第一种写法，值为对象，该对象中所有的key-value都会以props的形式传给Detail组件，缺点是值是死的
                             // props:{id:666,title:'777'}
@@ -45,6 +46,9 @@ export default new VueRouter({
                                     title:$route.query.title
                                 }
                             }
+=======
+                            component: Detail
+>>>>>>> 3a9a80a4d84a0ebe3efa7603d4af799b3360fb1e
                         }
                     ]
                 }
