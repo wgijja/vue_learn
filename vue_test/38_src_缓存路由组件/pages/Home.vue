@@ -22,7 +22,14 @@
                     >
                 </li>
             </ul>
-            <keep-alive include="News">
+            
+            <!-- 缓存一个 -->
+            <!-- <keep-alive include="News">
+                <router-view></router-view>
+            </keep-alive> -->
+
+            <!-- 缓存多个 -->
+            <keep-alive :include="['News','Message']">
                 <router-view></router-view>
             </keep-alive>
         </div>
