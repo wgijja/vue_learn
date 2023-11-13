@@ -11,7 +11,7 @@
                 <!-- 路由params传参，对象写法 -->
                 <router-link
                     :to="{
-                        name: 'xiangqing',
+                        name: 'detail',
                         query: {
                             id: d.id,
                             title: d.title,
@@ -44,7 +44,7 @@ export default {
     methods: {
         pushShow(d) {
             this.$router.push({
-                name: "xiangqing",
+                name: "detail",
                 query: {
                     id: d.id,
                     title: d.title,
@@ -53,7 +53,7 @@ export default {
         },
         replaceShow(d) {
             this.$router.replace({
-                name: "xiangqing",
+                name: "detail",
                 query: {
                     id: d.id,
                     title: d.title,

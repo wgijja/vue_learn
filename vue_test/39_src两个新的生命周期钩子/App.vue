@@ -43,8 +43,5 @@ import Banner from "./components/Banner";
 export default {
     name: "App",
     components: {Banner},
-    mounted(){
-        localStorage.setItem('school','atguigu')
-    }
 };
 </script>

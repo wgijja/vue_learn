@@ -23,9 +23,7 @@ const router = new VueRouter({
             name: 'zhuye',
             path: '/home',
             component: Home,
-            meta: {
-                isAuth: true, title: '主页'
-            },
+            meta: { title: '主页' },
             children: [
                 {
                     name: 'xiaoxi',
@@ -35,7 +33,7 @@ const router = new VueRouter({
                         isAuth: true,
                         title: '新闻'
                     },
-                    /* beforeEnter: (to, from, next) => {
+                    beforeEnter: (to, from, next) => {
                         if (to.meta.isAuth) {
                             if (localStorage.getItem('school') === 'atguigu') {
                                 next()
@@ -43,7 +41,7 @@ const router = new VueRouter({
                         } else {
                             next()
                         }
-                    } */
+                    }
                 },
                 {
                     name: '消息',
@@ -93,10 +91,10 @@ router.beforeEach((to, from, next) => {
 })*/
 
 //全局后置路由守卫——初始化的时候及每次路由切换之后被调用
-/* router.afterEach((to, from) => {
+router.afterEach((to, from) => {
     console.log('后置路由守卫', to, from)
     document.title = to.meta.title||'系统'
     
-})  */
+}) 
 
 export default router
