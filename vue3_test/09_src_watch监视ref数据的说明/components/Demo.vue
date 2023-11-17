@@ -14,14 +14,14 @@
 </template>
 
 <script>
-import { reactive, ref, watch, watchEffect } from "vue";
+import { reactive, ref, watch } from "vue";
 
 export default {
     name: "Demo",
     setup(props, context) {
         let sum = ref(0);
         let msg = ref("你好哇");
-        let person = reactive({
+        let person = ref({
             name: "张三",
             age: 18,
             job: {
@@ -31,20 +31,21 @@ export default {
             },
         });
 
-        //监视
-        /* watch(
-            sum,
-            (newVal, oldVal) => {
-                console.log("sum变化了");
-            },
-            {}
-        ); */
+        watch(sum, (newVal, oldVal) => {
+            console.log("sum变化了");
+        });
 
-        watchEffect(()=>{
-            const x1 = sum.value
-            const x2 = person.job.j1.salary
-            console.log('watchEffect指定的回调执行了');
-        })
+        //针对ref所监视对象属性的的情况
+        /* watch(person.value, (newVal, oldVal) => {
+            console.log("person变化了");
+        }); */
+        /* watch(
+            person,
+            (newVal, oldVal) => {
+                console.log("person变化了");
+            },
+            { deep: true }
+        ); */
 
         return {
             sum,
