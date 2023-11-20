@@ -1,7 +1,7 @@
 <template>
     <hr />
-    数值是:{{ sum }}
-    <button @click="sum++">点击加1</button>
+    数值是:{{ x.y }}
+    <button @click="x.y++">点击加1</button>
     <hr />
     <h2>姓名：{{ name }}</h2>
     <h2>年龄：{{ age }}</h2>
@@ -12,20 +12,12 @@
 </template>
 
 <script>
-import {
-    reactive,
-    readonly,
-    ref,
-    shallowReactive,
-    shallowReadonly,
-    shallowRef,
-    toRefs,
-} from "vue";
+import { reactive, ref, shallowReactive, shallowRef, toRefs } from "vue";
 
 export default {
     name: "Demo",
     setup() {
-        let sum = ref(0);
+        // let person = shallowReactive({ 只考虑第一层的响应式
         let person = reactive({
             name: "张三",
             age: 18,
@@ -36,14 +28,11 @@ export default {
             },
         });
 
-        // person = readonly(person)
-        person = shallowReadonly(person);
-
-        // sum = readonly(sum)
-        sum = shallowReadonly(sum);
+        // let x = shallowRef({ y: 0 }); 不进行对象的响应式处理
+        let x = ref({ y: 0 });
 
         return {
-            sum,
+            x,
             ...toRefs(person),
         };
     },
